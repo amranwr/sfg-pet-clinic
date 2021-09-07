@@ -6,7 +6,7 @@ import amr.springproject.sfgpetclinic.services.OwnerService;
 import java.util.Set;
 
 
-public  class OwnerMapService extends MapService<Owner, Long> implements OwnerService{
+public class OwnerMapService extends MapService<Owner, Long> implements OwnerService {
     @Override
     public Owner findByLastName(String lastName) {
         return null;
