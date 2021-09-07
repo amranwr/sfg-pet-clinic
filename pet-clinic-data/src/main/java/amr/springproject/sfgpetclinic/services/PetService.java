@@ -4,5 +4,5 @@ import amr.springproject.sfgpetclinic.model.Pet;
 
 import java.util.Set;
 
-public interface PetService extends CRUDService{
+public interface PetService extends CRUDService<Pet,Long>{
 }

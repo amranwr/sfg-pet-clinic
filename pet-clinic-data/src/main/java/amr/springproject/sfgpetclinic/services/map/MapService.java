@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class MapService<T,ID> implements CRUDService<T,ID> {
+public abstract class MapService<T,ID> {
     Map<ID,T> map;
     public MapService(){
         this.map = new HashMap<>();
@@ -17,22 +17,18 @@ public abstract class MapService<T,ID> implements CRUDService<T,ID> {
         return this.map.put(id,object);
     }
 
-    @Override
     public T save(T object) {
         return null;
     }
 
-    @Override
     public Set<T> findAll() {
         return new HashSet<>(map.values());
     }
 
-    @Override
     public T findById(ID id) {
         return map.get(id);
     }
 
-    @Override
     public void delete(T object) {
         for(Map.Entry<ID,T> item: map.entrySet()){
             if( item.getValue().equals(object)){
@@ -42,7 +38,6 @@ public abstract class MapService<T,ID> implements CRUDService<T,ID> {
         }
     }
 
-    @Override
     public void deleteById(ID id) {
         map.remove(id);
     }
