@@ -2,9 +2,10 @@ package amr.springproject.sfgpetclinic.services.map;
 
 import amr.springproject.sfgpetclinic.model.Pet;
 import amr.springproject.sfgpetclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
+@Service
 public class PetServiceMap extends MapService<Pet,Long> implements PetService {
     @Override
     public Pet save(Long aLong, Pet object) {
