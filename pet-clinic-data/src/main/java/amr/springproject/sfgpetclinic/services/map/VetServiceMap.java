@@ -8,11 +8,6 @@ import java.util.Set;
 @Service
 public class VetServiceMap extends MapService<Vet,Long> implements VetService {
     @Override
-    public Vet save(Long aLong, Vet object) {
-        return super.save(aLong, object);
-    }
-
-    @Override
     public Vet save(Vet object) {
         return super.save(object);
     }

@@ -13,10 +13,6 @@ public class OwnerMapService extends MapService<Owner, Long> implements OwnerSer
         return null;
     }
 
-    @Override
-    public Owner save(Long aLong, Owner object) {
-        return super.save(aLong, object);
-    }
 
     @Override
     public Owner save(Owner object) {

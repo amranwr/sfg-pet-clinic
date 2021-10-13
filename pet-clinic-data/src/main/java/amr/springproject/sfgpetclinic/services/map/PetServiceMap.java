@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 @Service
 public class PetServiceMap extends MapService<Pet,Long> implements PetService {
-    @Override
-    public Pet save(Long aLong, Pet object) {
-        return super.save(aLong, object);
-    }
 
     @Override
     public Pet save(Pet object) {

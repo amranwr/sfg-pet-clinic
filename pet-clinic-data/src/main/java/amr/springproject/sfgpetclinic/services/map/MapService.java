@@ -1,24 +1,28 @@
 package amr.springproject.sfgpetclinic.services.map;
 
+import amr.springproject.sfgpetclinic.model.BaseEntity;
 import amr.springproject.sfgpetclinic.services.CRUDService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public abstract class MapService<T,ID> {
-    Map<ID,T> map;
+public abstract class MapService<T extends BaseEntity,ID extends Long> {
+    protected Map<Long,T> map;
     public MapService(){
         this.map = new HashMap<>();
     }
 
-    public T save(ID id , T object){
-        return this.map.put(id,object);
-    }
-
     public T save(T object) {
-        return null;
+        if(object != null){
+            if(object.getId() !=null){
+                object.setId(this.getNextId());
+            }else{
+                object.setId(1L);
+            }
+            map.put(object.getId(),object);
+        }else{
+            throw new RuntimeException("object can not be null");
+        }
+        return object;
     }
 
     public Set<T> findAll() {
@@ -30,7 +34,7 @@ public abstract class MapService<T,ID> {
     }
 
     public void delete(T object) {
-        for(Map.Entry<ID,T> item: map.entrySet()){
+        for(Map.Entry<Long,T> item: map.entrySet()){
             if( item.getValue().equals(object)){
                 map.remove(item.getKey());
                 break;
@@ -40,5 +44,10 @@ public abstract class MapService<T,ID> {
 
     public void deleteById(ID id) {
         map.remove(id);
+    }
+
+    private Long getNextId(){
+        Long nextId = Collections.max(this.map.keySet())+1;
+        return nextId;
     }
 }
