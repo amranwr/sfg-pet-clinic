@@ -1,13 +1,7 @@
 package amr.springproject.sfgpetclinic.bootStrap;
 
-import amr.springproject.sfgpetclinic.model.Owner;
-import amr.springproject.sfgpetclinic.model.Pet;
-import amr.springproject.sfgpetclinic.model.PetType;
-import amr.springproject.sfgpetclinic.model.Vet;
-import amr.springproject.sfgpetclinic.services.OwnerService;
-import amr.springproject.sfgpetclinic.services.PetService;
-import amr.springproject.sfgpetclinic.services.PetTypeService;
-import amr.springproject.sfgpetclinic.services.VetService;
+import amr.springproject.sfgpetclinic.model.*;
+import amr.springproject.sfgpetclinic.services.*;
 import amr.springproject.sfgpetclinic.services.map.OwnerMapService;
 import amr.springproject.sfgpetclinic.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
@@ -21,17 +15,28 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final PetService petService;
+    private final SpecialtyService specialtyService;
 
 
-    public DataLoader(OwnerMapService ownerService, VetServiceMap vetService, PetTypeService petTypeService, PetService petService) {
+    public DataLoader(OwnerMapService ownerService, VetServiceMap vetService, PetTypeService petTypeService, PetService petService, SpecialtyService specialtyService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
+        this.specialtyService = specialtyService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        Specialty surgery = new Specialty();
+        surgery.setDescription("surgery");
+        Specialty massage = new Specialty();
+        massage.setDescription("massage");
+        specialtyService.save(surgery);
+        specialtyService.save(massage);
+        System.out.println("surgery id : "+surgery.getId());
+        System.out.println("massage id : "+massage.getId());
+
         PetType dog=  new PetType();
         dog.setName("dog");
         this.petTypeService.save(dog);
@@ -58,6 +63,8 @@ public class DataLoader implements CommandLineRunner {
         Vet vet = new Vet();
         vet.setFirstName("rana");
         vet.setLastName("anwr");
+        vet.getSpecialities().add(surgery);
+        vet.getSpecialities().add(massage);
         this.vetService.save(vet);
 
         System.out.println("data is loaded............");
