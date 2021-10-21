@@ -28,6 +28,13 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        int count = petService.findAll().size();
+        if(count == 0 ){
+            loadData();
+        }
+    }
+
+    private void loadData() {
         Specialty surgery = new Specialty();
         surgery.setDescription("surgery");
         Specialty massage = new Specialty();
@@ -43,7 +50,6 @@ public class DataLoader implements CommandLineRunner {
         PetType cat=  new PetType();
         dog.setName("cat");
         this.petTypeService.save(cat);
-
 
 
         System.out.println("ana fen");
