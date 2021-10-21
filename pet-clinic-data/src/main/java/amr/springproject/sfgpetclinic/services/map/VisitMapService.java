@@ -4,9 +4,10 @@ import amr.springproject.sfgpetclinic.model.Visit;
 import amr.springproject.sfgpetclinic.repositories.VisitRepo;
 import amr.springproject.sfgpetclinic.services.PetService;
 import amr.springproject.sfgpetclinic.services.VisitService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
+@Service
 public class VisitMapService extends MapService<Visit,Long> implements VisitService {
     private final PetService petService;
 
@@ -16,7 +17,8 @@ public class VisitMapService extends MapService<Visit,Long> implements VisitServ
 
     @Override
     public Visit save(Visit object) {
-        if(object.getId() == null || object.getPet().getId() == null || object.getPet().getPetType().getId() == null){
+
+        if(object == null || object.getPet() == null || object.getPet().getPetType() == null){
             throw new RuntimeException("invalid visit");
         }
         return super.save(object);
