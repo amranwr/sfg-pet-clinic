@@ -12,6 +12,7 @@ import java.util.Set;
 public class OwnerSDJpaService implements OwnerService {
     private final OwnerRepo ownerRepo;
 
+
     public OwnerSDJpaService(OwnerRepo ownerRepo) {
         this.ownerRepo = ownerRepo;
     }
