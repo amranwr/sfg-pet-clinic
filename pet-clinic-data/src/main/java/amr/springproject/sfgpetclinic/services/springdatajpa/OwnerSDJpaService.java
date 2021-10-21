@@ -6,6 +6,7 @@ import amr.springproject.sfgpetclinic.services.OwnerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 @Service
 @Profile("springDataJPAService")
@@ -29,7 +30,9 @@ public class OwnerSDJpaService implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
-        return (Set<Owner>)ownerRepo.findAll();
+        Set<Owner> owners = new HashSet<>();
+        ownerRepo.findAll().forEach(owners::add);
+        return owners;
     }
 
     @Override
