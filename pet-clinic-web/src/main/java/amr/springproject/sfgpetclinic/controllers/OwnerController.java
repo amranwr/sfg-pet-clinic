@@ -1,7 +1,6 @@
 package amr.springproject.sfgpetclinic.controllers;
 
 import amr.springproject.sfgpetclinic.services.OwnerService;
-import amr.springproject.sfgpetclinic.services.map.OwnerMapService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OwnerController {
     private final OwnerService ownerService;
 
-    public OwnerController(OwnerMapService ownerService) {
+    public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
     }
 

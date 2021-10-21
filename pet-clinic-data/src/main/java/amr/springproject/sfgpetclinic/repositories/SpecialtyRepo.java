@@ -4,6 +4,5 @@ import amr.springproject.sfgpetclinic.model.Specialty;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public interface SpecialtyRepo extends CrudRepository<Specialty,Long> {
 }

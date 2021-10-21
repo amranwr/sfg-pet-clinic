@@ -4,10 +4,12 @@ import amr.springproject.sfgpetclinic.model.Visit;
 import amr.springproject.sfgpetclinic.repositories.VisitRepo;
 import amr.springproject.sfgpetclinic.services.PetService;
 import amr.springproject.sfgpetclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 @Service
+@Profile("map")
 public class VisitMapService extends MapService<Visit,Long> implements VisitService {
     private final PetService petService;
 
