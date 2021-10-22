@@ -1,9 +1,15 @@
 package amr.springproject.sfgpetclinic.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "vets")
 public class Vet extends Person{
     @ManyToMany(fetch = FetchType.EAGER)
@@ -12,11 +18,9 @@ public class Vet extends Person{
             ,name = "vet_specialty")
     private Set<Specialty> specialities = new HashSet<>();
 
-    public Set<Specialty> getSpecialities() {
-        return specialities;
-    }
-
-    public void setSpecialities(Set<Specialty> specialities) {
+    @Builder
+    public Vet(Long id, String firstName, String lastName, Set<Specialty> specialities) {
+        super(id, firstName, lastName);
         this.specialities = specialities;
     }
 }

@@ -1,10 +1,16 @@
 package amr.springproject.sfgpetclinic.model;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "pets")
 public class Pet extends BaseEntity{
     @ManyToOne
@@ -21,43 +27,13 @@ public class Pet extends BaseEntity{
     @Column(name = "name")
     private String name;
 
-    public Set<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Set<Visit> visits) {
-        this.visits = visits;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public PetType getPetType() {
-        return petType;
-    }
-
-    public void setPetType(PetType petType) {
+    @Builder
+    public Pet(Long id, PetType petType, Set<Visit> visits, Owner owner, LocalDate birthDate, String name) {
+        super(id);
         this.petType = petType;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
+        this.visits = visits;
         this.owner = owner;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        this.name = name;
     }
 }
