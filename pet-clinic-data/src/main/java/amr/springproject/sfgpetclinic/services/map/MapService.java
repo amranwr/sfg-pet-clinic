@@ -12,17 +12,18 @@ public abstract class MapService<T extends BaseEntity,ID extends Long> {
     }
 
     public T save(T object) {
-        if(object != null){
-            if(object.getId() !=null){
-                object.setId(this.getNextId());
-            }else{
-                object.setId(1L);
+        if(object != null) {
+            if(object.getId() == null){
+                object.setId(getNextId());
             }
-            map.put(object.getId(),object);
-        }else{
-            throw new RuntimeException("object can not be null");
+
+            map.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Object cannot be null");
         }
+
         return object;
+
     }
 
     public Set<T> findAll() {
@@ -47,7 +48,14 @@ public abstract class MapService<T extends BaseEntity,ID extends Long> {
     }
 
     private Long getNextId(){
-        Long nextId = Collections.max(this.map.keySet())+1;
+        Long nextId = null;
+
+        try {
+            nextId = Collections.max(map.keySet()) + 1;
+        } catch (NoSuchElementException e) {
+            nextId = 1L;
+        }
+
         return nextId;
     }
 }

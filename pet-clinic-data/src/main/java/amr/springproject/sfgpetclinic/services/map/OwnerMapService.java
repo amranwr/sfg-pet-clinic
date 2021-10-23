@@ -1,6 +1,7 @@
 package amr.springproject.sfgpetclinic.services.map;
 
 import amr.springproject.sfgpetclinic.model.Owner;
+import amr.springproject.sfgpetclinic.model.Pet;
 import amr.springproject.sfgpetclinic.services.OwnerService;
 import amr.springproject.sfgpetclinic.services.PetService;
 import amr.springproject.sfgpetclinic.services.PetTypeService;
@@ -29,17 +30,26 @@ public class OwnerMapService extends MapService<Owner, Long> implements OwnerSer
     @Override
     public Owner save(Owner object) {
         if(object != null){
-            object.getPets().forEach(pet -> {
-                if(pet.getId() == null){
-                    petService.save(pet);
-                    System.out.println("pet wasn't saved but don't worry ;)");
-                    if(pet.getPetType().getId() == null){
-                        petTypeService.save(pet.getPetType());
+            if (object.getPets() != null) {
+                object.getPets().forEach(pet -> {
+                    if (pet.getPetType() != null){
+                        if(pet.getPetType().getId() == null){
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        }
+                    } else {
+                        throw new RuntimeException("Pet Type is required");
                     }
-                }
-            });
+
+                    if(pet.getId() == null){
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
+                    }
+                });
+            }
+
             return super.save(object);
-        }else{
+
+        } else {
             return null;
         }
     }
