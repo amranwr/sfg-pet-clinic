@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
@@ -44,14 +43,14 @@ class OwnerSDJpaServiceTest {
     void save() {
         Owner owner =Owner.builder().id(1L).build();
         ownerSDJpaService.save(owner);
-        when(ownerRepo.findById(1l)).thenReturn(Optional.ofNullable(owner));
-        assertEquals(1l,ownerSDJpaService.findById(1L).getId());
+        when(ownerRepo.findById(1L)).thenReturn(Optional.ofNullable(owner));
+        assertEquals(1L,ownerSDJpaService.findById(1L).getId());
     }
 
     @Test
     void findAll() {
-        Owner owner1 = Owner.builder().id(1l).build();
-        Owner owner2 = Owner.builder().id(2l).build();
+        Owner owner1 = Owner.builder().id(1L).build();
+        Owner owner2 = Owner.builder().id(2L).build();
         Set<Owner> ownerSet = new HashSet<>();
         ownerSet.add(owner1);
         ownerSet.add(owner2);
@@ -61,9 +60,9 @@ class OwnerSDJpaServiceTest {
 
     @Test
     void findById() {
-        Owner owner = Owner.builder().id(1l).build();
-        when(ownerRepo.findById(1l)).thenReturn(Optional.ofNullable(owner));
-        assertEquals(1l,ownerSDJpaService.findById(1l).getId());
+        Owner owner = Owner.builder().id(1L).build();
+        when(ownerRepo.findById(1L)).thenReturn(Optional.ofNullable(owner));
+        assertEquals(1L,ownerSDJpaService.findById(1L).getId());
     }
 
     @Test
