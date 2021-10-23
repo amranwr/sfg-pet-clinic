@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class OwnerControllerTest {
     @Mock
     private OwnerService ownerService;
-    @Mock
-    private Model model;
+
     @InjectMocks
     private OwnerController ownerController;
 
