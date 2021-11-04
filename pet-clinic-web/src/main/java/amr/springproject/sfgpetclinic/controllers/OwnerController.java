@@ -46,7 +46,7 @@ public class OwnerController {
             owner.setLastName("");
         }
 
-        List<Owner> owners = ownerService.findByLastNameLike(owner.getLastName());
+        List<Owner> owners = ownerService.findByLastNameLike("%"+owner.getLastName()+"%");
         if(owners.size() == 1 ){
             Owner temp = owners.get(0);
             return "redirect:owner/"+temp.getId();
