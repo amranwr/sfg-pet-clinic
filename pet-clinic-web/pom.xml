@@ -69,24 +69,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>amr.springProject</groupId>
-            <artifactId>pet-clinic-web</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <!--Note your version numbe might be different-->
-                <version>2.22.2</version>
-                <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>ro.isdc.wro4j</groupId>
                 <artifactId>wro4j-maven-plugin</artifactId>
