@@ -16,8 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,18 +32,28 @@ class OwnerControllerTest {
     private MockMvc mockMvc;
     @BeforeEach
     void setUp() {
-        Set<Owner> owners = new HashSet<>();
-        owners.add(Owner.builder().id(1L).build());
-        owners.add(Owner.builder().id(2L).build());
-        when(ownerService.findAll()).thenReturn(owners);
         mockMvc = MockMvcBuilders.standaloneSetup(ownerController).build();
     }
 
     @Test
     void getOwnerIndex() throws Exception {
+        Set<Owner> owners = new HashSet<>();
+        owners.add(Owner.builder().id(1L).build());
+        owners.add(Owner.builder().id(2L).build());
+        when(ownerService.findAll()).thenReturn(owners);
         mockMvc.perform(get("/ownerIndex"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owner/index"))
                 .andExpect(model().attribute("owners",hasSize(2)));
+    }
+
+    @Test
+    void displayOwnerTest()throws Exception{
+        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1L).build());
+        mockMvc.perform(get("/owner/1"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("owner"))
+                        .andExpect(view().name("owner/ownerDetails"));
+        verify(ownerService,times(1)).findById(anyLong());
     }
 }
