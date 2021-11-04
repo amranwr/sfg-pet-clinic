@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Service
 @Profile("springDataJPAService")
@@ -48,5 +49,10 @@ public class OwnerSDJpaService implements OwnerService {
     @Override
     public void deleteById(Long aLong) {
         ownerRepo.deleteById(aLong);
+    }
+
+    @Override
+    public List findByLastNameLike(String LastName) {
+        return ownerRepo.findAllByLastNameLike(LastName);
     }
 }

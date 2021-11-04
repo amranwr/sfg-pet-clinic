@@ -58,4 +58,5 @@ public abstract class MapService<T extends BaseEntity,ID extends Long> {
 
         return nextId;
     }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,5 +56,32 @@ class OwnerControllerTest {
                 .andExpect(model().attributeExists("owner"))
                         .andExpect(view().name("owner/ownerDetails"));
         verify(ownerService,times(1)).findById(anyLong());
+    }
+    @Test
+    void findOwnersNotFound()throws Exception{
+        when(ownerService.findByLastNameLike(anyString())).thenReturn(Arrays.asList());
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owner/findOwners"));
+        verify(ownerService,times(1)).findByLastNameLike(anyString());
+    }
+
+    @Test
+    void findOwnersOnlyOneFound()throws Exception{
+        when(ownerService.findByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:owner/1"));
+        verify(ownerService,times(1)).findByLastNameLike(anyString());
+    }
+
+    @Test
+    void findOwnersMoreThanOne()throws Exception{
+        when(ownerService.findByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()
+        ,Owner.builder().id(2L).build()));
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owner/ownersList"));
+        verify(ownerService,times(1)).findByLastNameLike(anyString());
     }
 }
