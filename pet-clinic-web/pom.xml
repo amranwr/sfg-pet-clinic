@@ -70,12 +70,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>amr.springProject</groupId>
             <artifactId>pet-clinic-web</artifactId>
             <version>0.0.3-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
+        -->
     </dependencies>
 
     <build>
