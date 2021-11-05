@@ -31,7 +31,9 @@ public class Pet extends BaseEntity{
     public Pet(Long id, PetType petType, Set<Visit> visits, Owner owner, LocalDate birthDate, String name) {
         super(id);
         this.petType = petType;
-        this.visits = visits;
+        if(visits == null || visits.size()>0){
+            this.visits = visits;
+        }
         this.owner = owner;
         this.birthDate = birthDate;
         this.name = name;
