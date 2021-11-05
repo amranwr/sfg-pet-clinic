@@ -9,6 +9,10 @@ import java.util.Set;
 @Service
 @Profile("map")
 public class PetServiceMap extends MapService<Pet,Long> implements PetService {
+    @Override
+    public Pet updateExistingPet(Long ownerId, Pet pet) {
+        return null;
+    }
 
     @Override
     public Pet save(Pet object) {
